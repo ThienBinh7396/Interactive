@@ -1,0 +1,21 @@
+{
+  "name": "Interactive-ts",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {
+    "default_icon": "assets/icons/active-icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://ymobile-onlinestore-dev.site-ymobile.net/*",
+        "http://127.0.0.1:5500/*"
+      ],
+      "js": ["./content_scripts/main_scripts.js"],
+      "run_at": "document_idle",
+      "world": "MAIN"
+    }
+  ],
+  "host_permissions": ["http://*/*", "https://*/*"],
+  "permissions": []
+}

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="fetch">Fetch data</button>
+    <br />
+    <div id="content">
+      <pre></pre>
+    </div>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.1/axios.min.js"
+      integrity="sha512-emSwuKiMyYedRwflbZB2ghzX8Cw8fmNVgZ6yQNNXXagFzFOaQmbvQ1vmDkddHjm5AITcBIZfC7k4ShQSjgPAmQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script>
+      // const _open = window.XMLHttpRequest.prototype.open;
+
+      // window.XMLHttpRequest.prototype.open = function (method, URL) {
+      //   let _onreadystatechange = this.onreadystatechange;
+
+      //   let _this = this;
+
+      //   _this.onreadystatechange = function () {
+      //     console.log("Request: ", this);
+      //     if (
+      //       _this.readyState === 4
+      //     ) {
+
+      //       try {
+      //         this.status = 200;
+      //         var data = JSON.parse(_this.responseText);
+
+      //         console.log("Url", data, URL);
+
+      //         data = {
+      //           status: "success",
+      //           result: "2025-04-10T17:31:04+09:00",
+      //         };
+
+      //         // rewrite responseText
+      //         Object.defineProperty(_this, "responseText", {
+      //           value: JSON.stringify(data),
+      //         });
+
+      //         Object.defineProperty(_this, "status", {
+      //           value: 200
+      //         });
+      //       } catch (e) {
+      //         console.log("Error", e);
+      //       }
+      //     }
+      //     // call original callback
+      //     if (_onreadystatechange) _onreadystatechange.apply(this, arguments);
+      //   };
+
+      //   // detect any onreadystatechange changing
+      //   Object.defineProperty(this, "onreadystatechange", {
+      //     get: function () {
+      //       return _onreadystatechange;
+      //     },
+      //     set: function (value) {
+      //       _onreadystatechange = value;
+      //     },
+      //   });
+
+      //   return _open.apply(_this, arguments);
+      // };
+
+      function fetchData() {
+        axios
+          .get(
+            "https://jsonplaceholder.typicode.com/todos/" +
+              12333 +
+              parseInt(Math.random() * 20),
+          )
+          .then(showLog)
+          .catch(showLog);
+      }
+
+      function showLog(data) {
+        document.querySelector("#content pre").textContent = JSON.stringify(
+          data,
+          null,
+          "\t",
+        );
+      }
+
+      document.querySelector("#fetch").addEventListener("click", fetchData);
+    </script>
+  </body>
+</html>
