@@ -1,5 +1,6 @@
 import { Character } from "~/types/index.type";
 import Common from "./Common";
+import MockApi from "../mocks/MockApi";
 
 class InputPage extends Common {
   async fillContractorPrimaryPhoneNumber(phoneNumber = "09010231311") {
@@ -35,6 +36,49 @@ class InputPage extends Common {
 
   async fillContractorEmail() {
     await this.fillField("#email", "daichi.nomura@g.softbank.co.jp");
+
+    MockApi.addMock({
+      url: "https://general-bff-1.dev-sb-online.biz/api/v1/mail-confirmations/verify",
+      mockValue: {
+        status: 200,
+        responseData: {
+          value: "ok",
+        },
+      },
+    });
+
+    this.clickTo("#send-mail-button");
+
+    await this.waitFor(() => {
+      const modalAuthNode = this.selector("#mail-auth-modal");
+
+      return (
+        !!modalAuthNode &&
+        window.getComputedStyle(modalAuthNode).display !== "none"
+      );
+    });
+
+    console.log("Log: Show mail auth modal")
+
+    const isInputOneTimePasswordAvailable = await this.waitForAvailable(
+      "#input-one-time-password"
+    );
+
+    if (!isInputOneTimePasswordAvailable) {
+      console.error("The OTP isn't available!");
+      return;
+    }
+
+    await this.fillField("#input-one-time-password", "123");
+
+    await this.waitFor(() => {
+      const modalAuthNode = this.selector("#mail-auth-modal");
+
+      return (
+        !!modalAuthNode &&
+        window.getComputedStyle(modalAuthNode).display === "none"
+      );
+    });
 
     this.clickTo("#email-send-agreement");
   }

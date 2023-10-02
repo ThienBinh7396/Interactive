@@ -248,7 +248,7 @@ class Action {
   async waitForAvailable(selector: string, options?: { timeout: number }) {
     const timeout = options?.timeout || 10000;
 
-    await this.waitFor(
+    return await this.waitFor(
       () => {
         const elementNode = this.selector(selector);
 
