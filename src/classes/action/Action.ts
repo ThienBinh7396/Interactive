@@ -1,5 +1,5 @@
 import { SAMPLE_IMAGE_URL } from "~/constant/constant";
-import { SampleImageFileData } from "~/types/action.type";
+import { SampleImageFileData, SelectActionConfig } from "~/types/action.type";
 
 class Action {
   waitTimeout?: number = undefined;
@@ -116,7 +116,14 @@ class Action {
     nodeElement.click();
   }
 
-  async select(selector: string, value: string) {
+  async select(
+    selector: string,
+    value: string,
+    config: SelectActionConfig = {
+      isDispatchChangeEvent: true,
+      timeout: 0.2
+    },
+  ) {
     const selectorNode = this.selector(selector);
     if (!selectorNode) {
       console.error(
@@ -126,7 +133,50 @@ class Action {
     }
 
     if (selectorNode instanceof HTMLSelectElement) {
+      selectorNode.scrollIntoView();
       selectorNode.value = value;
+
+      if (config.isDispatchChangeEvent) {
+        await this.waitTime(config.timeout || 0.2);
+        selectorNode.dispatchEvent(new Event("change"));
+      }
+    }
+  }
+
+  async selectFirstElement(selector: string, value?: string) {
+    const selectorNode = this.selector(selector);
+    if (!selectorNode) {
+      console.error(
+        `The element with the ${selector} selector does not exist.`,
+      );
+      return;
+    }
+
+    const isOptionAvailable = await this.waitFor(
+      () => {
+        const optionNode = selectorNode.querySelectorAll("option");
+
+        return !!optionNode && optionNode.length >= 2;
+      },
+      {
+        interval: 300,
+      },
+    );
+
+    if (!isOptionAvailable) {
+      console.error(
+        `The element with the ${selector} selector doesn' have any options!`,
+      );
+      return;
+    }
+
+    if (selectorNode instanceof HTMLSelectElement) {
+      selectorNode.value =
+        value ||
+        selectorNode
+          .querySelector("option:nth-child(2)")
+          ?.getAttribute("value") ||
+        "";
       selectorNode.scrollIntoView();
       await this.waitTime(0.2);
       selectorNode.dispatchEvent(new Event("change"));
@@ -218,7 +268,7 @@ class Action {
     condition: () => boolean,
     options?: { timeout?: number; interval?: number },
   ) {
-    const timeout = options?.timeout || 300; // s
+    const timeout = options?.timeout || 30; // s
     const interval = options?.interval || 200; // ms
 
     return new Promise((resolve) => {

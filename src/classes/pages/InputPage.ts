@@ -58,10 +58,10 @@ class InputPage extends Common {
       );
     });
 
-    console.log("Log: Show mail auth modal")
+    console.log("Log: Show mail auth modal");
 
     const isInputOneTimePasswordAvailable = await this.waitForAvailable(
-      "#input-one-time-password"
+      "#input-one-time-password",
     );
 
     if (!isInputOneTimePasswordAvailable) {

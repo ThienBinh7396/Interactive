@@ -119,6 +119,10 @@ class Common extends Action {
         nextButtonSelector = "#input-next-button";
         break;
 
+      case PageTitle.PAYMENT:
+        nextButtonSelector = "#payment-next-button";
+        break;
+
       case PageTitle.AGREEMENT:
         nextButtonSelector = "#agreements-next-button";
         break;

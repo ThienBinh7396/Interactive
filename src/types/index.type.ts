@@ -33,6 +33,7 @@ export enum PageTitle {
   UPLOAD = "upload",
   INPUT = "input",
   ADDITION = "addition",
+  PAYMENT = "payment",
   AGREEMENT = "agreement",
   CONFIRM = "confirm",
 }

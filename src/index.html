@@ -7,6 +7,10 @@
   </head>
   <body>
     <button id="fetch">Fetch data</button>
+    <input type="file" name="" id="file" />
+    <div id="preview">
+      <img src="" alt="" />
+    </div>
     <br />
     <div id="content">
       <pre></pre>
@@ -20,6 +24,23 @@
     ></script>
 
     <script>
+      document.querySelector("#file").addEventListener("change", function () {
+        const fileData = this.files[0];
+        console.log(this, fileData);
+
+        const reader = new FileReader();
+        reader.readAsDataURL(fileData);
+        reader.onload = function () {
+          console.log(reader.result);
+          document
+            .querySelector("#preview img")
+            .setAttribute("src", reader.result);
+        };
+        reader.onerror = function (error) {
+          console.log("Error: ", error);
+        };
+      });
+
       // const _open = window.XMLHttpRequest.prototype.open;
 
       // window.XMLHttpRequest.prototype.open = function (method, URL) {

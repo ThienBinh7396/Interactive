@@ -14,3 +14,8 @@ export type SampleImageFileData = {
   value: FileList | null;
   status: "initial" | "loading" | "done" | "error";
 };
+
+export type SelectActionConfig = {
+  isDispatchChangeEvent: boolean;
+  timeout?: number;
+};
