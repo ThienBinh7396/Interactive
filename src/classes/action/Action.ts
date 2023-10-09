@@ -121,7 +121,7 @@ class Action {
     value: string,
     config: SelectActionConfig = {
       isDispatchChangeEvent: true,
-      timeout: 0.2
+      timeout: 0.2,
     },
   ) {
     const selectorNode = this.selector(selector);

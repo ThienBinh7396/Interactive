@@ -81,12 +81,18 @@ class Common extends Action {
       case PageTitle.INPUT:
         pageTitle = "お客さま情報入力";
         break;
+
+      case PageTitle.PAYMENT:
+        pageTitle = "お支払い情報";
+        break;
     }
 
     await this.waitFor(() => {
       const allH1Nodes = this.selectorAll("h1");
       return allH1Nodes.some((node) => node.textContent?.includes(pageTitle));
     });
+
+    await this.waitTime(1);
   }
 
   async nextPage(page: PageTitle) {

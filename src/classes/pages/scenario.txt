@@ -1,0 +1,74 @@
+(async () => {
+  // Index page
+  I.selectContractById("c01"); I.selectPaymentCount("pc1");
+  await I.waitTime(3);
+  await I.nextPage("plan");
+
+  // Option page
+  await I.waitForPage("option");
+  I.selectOption("advance_option", false); 
+  I.selectOption("daretei", false); 
+  I.selectOption("datazoryo", false); 
+  I.selectOption("datazoryo_kihen", false); 
+  I.selectOption("group_call", false); 
+  I.selectOption("itteigakustop", false); 
+  I.selectOption("kosyou_p_b", false); 
+  I.selectOption("kosyou_pp_b", false); 
+  I.selectOption("kosyou_pp_b_kihen", false); 
+  I.selectOption("kosyou_ps_b", false); 
+  I.selectOption("linemusic", false); 
+  I.selectOption("meiwaku_block", false); 
+  I.selectOption("number_block", false); 
+  I.selectOption("rusuden_plus_i", false); 
+  I.selectOption("rusuden_plus_p", false); 
+  I.selectOption("rusuden_plus_s", false); 
+  I.selectOption("s_basic", false); 
+  I.selectOption("security_android", false); 
+  I.selectOption("security_iphone", false); 
+  I.selectOption("super_daretei", false); 
+  I.selectOption("super_daretei_S", false); 
+  I.selectOption("tanmatsuhosyo", false); 
+  I.selectOption("warikomi_call", false); 
+  I.selectOption("wide_support", false); 
+  I.selectOption("ym_acs", false); 
+
+  await I.waitTime(2);
+  await I.nextPage("option");
+
+  // Upload page
+  await I.waitForPage("upload");
+
+  await I.uploadCharacterCertificateDocument("contractor");
+  I.selectContractorAddress(true);
+
+  await I.nextPage("upload");
+
+  // Input page
+  await I.waitForPage("input");
+
+  await I.waitTime(2);
+
+  await I.fillCharacterName("contractor");
+  await I.fillContractorPrimaryPhoneNumber();
+  await I.selectCharacterGender("contractor");
+  await I.fillCharacterBirthDay("contractor");
+
+  await I.fillContractorZipCode();
+
+  await I.fillContractorEmail();
+
+  await I.fillField("#first-user-network-pass-code", "4321");
+
+  await I.scrollToNextPageButton("input");
+
+  await I.nextPage("input");
+
+  await I.waitForPage("payment");
+
+  await I.fillCreditCardInformation();await I.nextPage("payment");
+
+  await I.agreeAgreement(true); await I.nextPage("agreement");
+
+
+  await I.scrollToNextPageButton("confirm");
+})();
