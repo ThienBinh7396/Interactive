@@ -1,13 +1,15 @@
-import { PaymentCount } from "~/types/index.type";
 import Common from "./Common";
 import { CreditCardInformation } from "~/types/payment.type";
 
 class PaymentPage extends Common {
-  checkAvailableCreditCardType() {
-    const paymentCount =
-      window.$nuxt.$store.state.ols._indexPage.mobileDevice.productPaymentCount;
+  async checkAvailableCreditCardType() {
+    const monthlyPaymentCheckNode = `#monthly-payment-credit-card-number`
 
-    return paymentCount === PaymentCount.PC1 ? "product" : "monthly";
+    const isMonthlyPaymentAvailable = await this.waitForAvailable(monthlyPaymentCheckNode, {
+      timeout: 10
+    })
+
+    return isMonthlyPaymentAvailable ? "monthly" : "product";
   }
 
   getAvailableCreditCardExpire(creditCardType: string): CreditCardInformation {
@@ -38,7 +40,7 @@ class PaymentPage extends Common {
     const { creditCardNumber, expireYear, expireMonth, securityCode } =
       creditCardInformation;
 
-    const creditCardType = this.checkAvailableCreditCardType();
+    const creditCardType = await this.checkAvailableCreditCardType();
 
     const {
       expireYear: expirationYearAvailableValue,

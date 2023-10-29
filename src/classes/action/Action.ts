@@ -102,7 +102,13 @@ class Action {
     return !!document.querySelector(selector);
   }
 
-  clickTo(selector: string) {
+  clickTo(selector: string | HTMLElement) {
+    if (selector instanceof HTMLElement) {
+      selector.scrollIntoView();
+      selector.click();
+      return
+    }
+
     const nodeElement = this.selector(selector);
 
     if (!nodeElement) {

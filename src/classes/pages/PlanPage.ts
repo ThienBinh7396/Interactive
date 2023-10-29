@@ -1,4 +1,4 @@
-import { Contract, PaymentCount, Plan } from "~/types/index.type";
+import { Contract, PaymentCount, Plan, DeviceType, DeviceTypeToValueMapping } from "~/types/index.type";
 import Common from "./Common";
 import { SelectContractConfig } from "~/types/plan.type";
 
@@ -85,6 +85,10 @@ class PlanPage extends Common {
     if (forceChecked === undefined || forceChecked !== isChecked) {
       this.clickTo("#family-discount-label");
     }
+  }
+
+  async selectBringInDevice(device: DeviceType = DeviceType.Iphone) {
+    this.clickTo(`#first-device-section [name="first-device"][value="${DeviceTypeToValueMapping[device]}"] ~ label`)
   }
 }
 

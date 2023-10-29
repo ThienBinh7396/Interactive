@@ -11,13 +11,19 @@
         "https://ymobile-onlinestore-dev.site-ymobile.net/*",
         "http://127.0.0.1:5500/*",
         "http://127.0.0.1:8081/*",
-        "http://localhost:*/*"
+        "http://localhost:*/*",
+        "https://www.ymobile.jp/*"
       ],
-      "js": ["./content_scripts/main_scripts.js"],
+      "js": [
+        "./content_scripts/main_scripts.js"
+      ],
       "run_at": "document_idle",
       "world": "MAIN"
     }
   ],
-  "host_permissions": ["http://*/*", "https://*/*"],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
   "permissions": []
 }

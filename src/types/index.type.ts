@@ -37,3 +37,15 @@ export enum PageTitle {
   AGREEMENT = "agreement",
   CONFIRM = "confirm",
 }
+
+export enum DeviceType {
+  Android = "android",
+  Iphone = "iphone",
+  Ipad = "ipad",
+}
+
+export const DeviceTypeToValueMapping = {
+  [DeviceType.Android]: "android-smartphone",
+  [DeviceType.Iphone]: "iPhone",
+  [DeviceType.Ipad]: "iPad",
+}

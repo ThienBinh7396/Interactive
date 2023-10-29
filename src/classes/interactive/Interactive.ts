@@ -4,6 +4,7 @@ import PlanPage from "~/classes/pages/PlanPage";
 import UploadPage from "~/classes/pages/UploadPage";
 import PaymentPage from "~/classes/pages/PaymentPage";
 import AgreementPage from "~/classes/pages/AgreementPage";
+import CompanySalePage from "~/classes/pages/CompanySalePage";
 
 import { Mixin } from "ts-mixer";
 
@@ -14,4 +15,5 @@ export default Mixin(
   InputPage,
   PaymentPage,
   AgreementPage,
+  CompanySalePage,
 );
