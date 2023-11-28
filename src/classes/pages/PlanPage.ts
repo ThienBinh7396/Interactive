@@ -90,6 +90,10 @@ class PlanPage extends Common {
   async selectBringInDevice(device: DeviceType = DeviceType.Iphone) {
     this.clickTo(`#first-device-section [name="first-device"][value="${DeviceTypeToValueMapping[device]}"] ~ label`)
   }
+
+  async confirmEsim() {
+    this.clickTo("#esim-confirmed-check-label");
+  }
 }
 
 export default PlanPage;

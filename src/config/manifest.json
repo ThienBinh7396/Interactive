@@ -9,6 +9,13 @@
     {
       "matches": [
         "https://ymobile-onlinestore-dev.site-ymobile.net/*",
+        "https://preview-ymobile-onlinestore-dev.site-ymobile.net/*",
+        "https://order-qa.site-ymobile.net/*",
+        "https://preview-order-qa.site-ymobile.net/*",
+        "https://order-stg.site-ymobile.net/s*",
+        "https://preview-order-stg.site-ymobile.net/*",
+        "https://ymobile-onlinestore-dev.site-ymobile.net/*",
+        "https://ymobile-onlinestore-dev.site-ymobile.net/*",
         "http://127.0.0.1:5500/*",
         "http://127.0.0.1:8081/*",
         "http://localhost:*/*",
